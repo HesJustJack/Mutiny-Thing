@@ -21,12 +21,13 @@
       --accent-soft: rgba(224, 60, 60, 0.14);
       --secondary: #2dd4bf;
       --secondary-soft: rgba(45, 212, 191, 0.14);
-      --sidebar-width: 112px;
+      --sidebar-width: 132px;
       --radius-lg: 24px;
       --radius-md: 18px;
       --radius-sm: 12px;
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
       --grid-line: rgba(255, 255, 255, 0.03);
+      --nav-button-size: calc(var(--sidebar-width) - 32px);
     }
 
     * {
@@ -168,18 +169,26 @@
       width: 100%;
       display: grid;
       gap: 10px;
+      justify-items: center;
     }
 
     .nav-button {
-      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      width: var(--nav-button-size);
+      height: var(--nav-button-size);
+      margin-inline: auto;
       border: 1px solid transparent;
       background: transparent;
       color: inherit;
       border-radius: 18px;
-      padding: 12px 8px;
-      display: grid;
-      gap: 8px;
-      justify-items: center;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
       cursor: pointer;
       transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, color 180ms ease;
     }
@@ -194,8 +203,6 @@
 
     .nav-button.active {
       background: linear-gradient(180deg, rgba(224, 60, 60, 0.16), rgba(224, 60, 60, 0.08));
-      border-color: var(--border-strong);
-      box-shadow: inset 0 0 0 1px rgba(224, 60, 60, 0.08), 0 12px 24px rgba(0, 0, 0, 0.24);
     }
 
     .nav-icon {
@@ -208,12 +215,6 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       color: var(--text);
       transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
-    }
-
-    .nav-button.active .nav-icon {
-      background: var(--accent-soft);
-      border-color: rgba(224, 60, 60, 0.26);
-      color: #fff0f0;
     }
 
     .nav-icon svg {
@@ -229,10 +230,9 @@
     .nav-label {
       font-size: 0.64rem;
       color: var(--text-muted);
-    }
-
-    .nav-button.active .nav-label {
-      color: var(--text);
+      line-height: 1;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .sidebar-footer {
@@ -271,7 +271,7 @@
     .main-inner {
       min-height: calc(100vh - 60px);
       display: grid;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: auto;
       gap: 24px;
     }
 
@@ -279,7 +279,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 18px;
       padding: 22px 26px;
       border-radius: var(--radius-lg);
       background: linear-gradient(180deg, rgba(18, 22, 29, 0.88), rgba(18, 22, 29, 0.7));
@@ -290,46 +290,7 @@
 
     .topbar-copy {
       display: grid;
-      gap: 8px;
-    }
-
-    .topbar-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .topbar-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text-muted);
-      font-size: 0.66rem;
-    }
-
-    .topbar-chip::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: 0.85;
-    }
-
-    .topbar-chip.alert {
-      color: #ff8b8b;
-      background: rgba(224, 60, 60, 0.08);
-      border-color: rgba(224, 60, 60, 0.16);
-    }
-
-    .topbar-chip.stable {
-      color: var(--secondary);
-      background: rgba(45, 212, 191, 0.08);
-      border-color: rgba(45, 212, 191, 0.16);
+      gap: 6px;
     }
 
     .page-title {
@@ -344,99 +305,50 @@
 
     .page-subtitle {
       margin: 0;
-      max-width: 54ch;
       color: var(--text-muted);
       font-size: 0.98rem;
-    }
-
-    .topbar-side {
-      min-width: 220px;
-      display: grid;
-      justify-items: end;
-      gap: 12px;
-    }
-
-    .clock-card {
-      width: min(100%, 240px);
-      padding: 16px 18px;
-      border-radius: var(--radius-md);
-      background: linear-gradient(180deg, rgba(224, 60, 60, 0.1), rgba(224, 60, 60, 0.04));
-      border: 1px solid rgba(224, 60, 60, 0.16);
-    }
-
-    .clock-label {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      color: var(--text-muted);
-      font-family: "DM Mono", monospace;
-      font-size: 0.68rem;
+      text-transform: uppercase;
       letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .clock-time,
-    .clock-date {
       font-family: "DM Mono", monospace;
     }
 
-    .clock-time {
-      margin-top: 10px;
-      font-size: clamp(1.4rem, 2vw, 2rem);
-      letter-spacing: 0.08em;
-      color: #fff4f4;
-    }
-
-    .clock-date {
-      margin-top: 4px;
-      color: var(--text-muted);
-      font-size: 0.78rem;
+    .live-timestamp {
+      font-family: "DM Mono", monospace;
+      color: #fff5f5;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      font-size: 0.82rem;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(224, 60, 60, 0.14), rgba(224, 60, 60, 0.04));
+      border: 1px solid rgba(224, 60, 60, 0.24);
+      white-space: nowrap;
     }
 
-    .content-shell {
+    .dashboard-content {
       display: grid;
-      grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.85fr);
-      gap: 24px;
-      min-height: 0;
+      gap: 18px;
     }
 
-    .panel,
-    .stack {
-      min-height: 100%;
+    .page-view {
+      display: none;
     }
 
-    .panel {
+    .page-view.active {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
       position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 20%),
-        var(--bg-panel);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(18, 22, 29, 0.9), rgba(18, 22, 29, 0.7));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      min-height: 460px;
-      display: grid;
-      place-items: center;
-      padding: 36px;
-      isolation: isolate;
+      overflow: hidden;
     }
 
-    .panel::before,
-    .mini-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(45, 212, 191, 0.06), transparent 26%, transparent 70%, rgba(224, 60, 60, 0.07));
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .panel::after,
-    .mini-panel::after {
+    .card::after {
       content: "";
       position: absolute;
       inset: 1px;
@@ -445,107 +357,598 @@
       pointer-events: none;
     }
 
-    .placeholder-copy {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      display: grid;
+    .server-banner {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 14px;
-      justify-items: center;
+      flex-wrap: wrap;
     }
 
-    .panel-kicker {
+    .server-title {
+      margin: 0;
+      font-family: "Rajdhani", sans-serif;
+      font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .banner-meta,
+    .meta-label,
+    .value-mono,
+    .tag,
+    .chaos-label,
+    .chaos-value,
+    .chaos-status,
+    .list-meta,
+    .rank-badge,
+    .status-pill,
+    .stat-label,
+    .section-kicker,
+    .wait-time {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .banner-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 191, 0.22);
+      background: rgba(45, 212, 191, 0.09);
       color: var(--secondary);
+      font-size: 0.7rem;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.55);
+      animation: pulse-online 1.6s ease-out infinite;
+    }
+
+    .meta-label {
+      color: var(--text-muted);
       font-size: 0.72rem;
     }
 
-    .placeholder-title {
-      margin: 0;
-      font-family: "Rajdhani", sans-serif;
-      font-size: clamp(2.2rem, 4vw, 4.2rem);
-      line-height: 0.9;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .value-mono {
+      color: #f4f8ff;
+      font-size: 0.86rem;
     }
 
-    .placeholder-text {
-      margin: 0;
-      max-width: 36ch;
-      color: var(--text-muted);
-      font-size: 1rem;
+    .tag {
+      border: 1px solid rgba(224, 60, 60, 0.28);
+      background: rgba(224, 60, 60, 0.12);
+      color: #ff8b8b;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.7rem;
     }
 
-    .stack {
+    .stats-grid {
       display: grid;
-      grid-template-rows: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 24px;
     }
 
-    .mini-panel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 24px;
-      background: var(--bg-panel-strong);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      min-height: 218px;
+    .stat-card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.16), 0 16px 32px rgba(0, 0, 0, 0.36);
+    }
+
+    .stat-card[data-accent="red"]:hover {
+      box-shadow: 0 0 0 1px rgba(224, 60, 60, 0.2), 0 16px 32px rgba(0, 0, 0, 0.36);
+    }
+
+    .stat-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      padding: 24px;
-      isolation: isolate;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--secondary);
     }
 
-    .mini-panel .placeholder-title {
-      font-size: clamp(1.5rem, 2vw, 2.1rem);
+    .stat-card[data-accent="red"] .stat-icon {
+      color: #ff8b8b;
     }
 
-    .mini-panel .placeholder-text {
-      max-width: 26ch;
+    .stat-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.66rem;
+    }
+
+    .stat-number {
+      margin: 0;
+      font-family: "DM Mono", monospace;
+      font-size: clamp(1.45rem, 2.6vw, 2rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: #f7fbff;
+    }
+
+    .chaos-card {
+      padding: 18px 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .chaos-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .chaos-label {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .chaos-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chaos-value {
+      font-size: 0.9rem;
+      color: #f4f8ff;
+    }
+
+    .chaos-status {
+      font-size: 0.68rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 6px 10px;
+    }
+
+    .chaos-track {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chaos-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      box-shadow: 0 0 22px rgba(224, 60, 60, 0.38);
+      transition: width 300ms ease;
+    }
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .staff-leaderboard {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .leaderboard-list,
+    .actions-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .leader-row {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    .leader-row:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.12), 0 12px 24px rgba(0, 0, 0, 0.28);
+    }
+
+    .leader-rank {
+      font-family: "DM Mono", monospace;
+      font-size: 1rem;
+      align-self: start;
+      color: var(--text-muted);
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 0;
+    }
+
+    .leader-rank.gold {
+      color: #f9d27a;
+      border-color: rgba(249, 210, 122, 0.35);
+      background: rgba(249, 210, 122, 0.12);
+    }
+
+    .leader-rank.silver {
+      color: #d2dbe7;
+      border-color: rgba(210, 219, 231, 0.35);
+      background: rgba(210, 219, 231, 0.1);
+    }
+
+    .leader-rank.bronze {
+      color: #de9f74;
+      border-color: rgba(222, 159, 116, 0.35);
+      background: rgba(222, 159, 116, 0.1);
+    }
+
+    .leader-main {
+      display: grid;
+      gap: 8px;
+    }
+
+    .leader-top,
+    .leader-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sits-count,
+    .leader-level {
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .sits-value {
+      color: #f4f8ff;
       font-size: 0.9rem;
     }
 
-    .hud-corners {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
+    .xp-track {
+      height: 10px;
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
     }
 
-    .hud-corners span {
-      position: absolute;
-      width: 26px;
-      height: 26px;
-      border-color: rgba(255, 255, 255, 0.14);
-      border-style: solid;
+    .xp-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--secondary), rgba(224, 60, 60, 0.8));
+      box-shadow: 0 0 18px rgba(45, 212, 191, 0.24);
+      transition: width 300ms ease;
     }
 
-    .hud-corners span:nth-child(1) {
-      top: 18px;
-      left: 18px;
-      border-width: 1px 0 0 1px;
-      border-top-left-radius: 10px;
+    .staff-spotlights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .hud-corners span:nth-child(2) {
-      top: 18px;
-      right: 18px;
-      border-width: 1px 1px 0 0;
-      border-top-right-radius: 10px;
+    .spotlight-card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
     }
 
-    .hud-corners span:nth-child(3) {
-      bottom: 18px;
-      right: 18px;
-      border-width: 0 1px 1px 0;
-      border-bottom-right-radius: 10px;
+    .spotlight-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 1px rgba(224, 60, 60, 0.12), 0 12px 24px rgba(0, 0, 0, 0.28);
     }
 
-    .hud-corners span:nth-child(4) {
-      bottom: 18px;
-      left: 18px;
-      border-width: 0 0 1px 1px;
-      border-bottom-left-radius: 10px;
+    .spotlight-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .spotlight-quote {
+      margin: 0;
+      font-style: italic;
+      color: #cbd5e7;
+      font-size: 0.92rem;
+    }
+
+    .actions-card {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .action-main {
+      min-width: 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #dce5f5;
+    }
+
+    .action-staff,
+    .action-target {
+      font-family: "Rajdhani", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 1rem;
+    }
+
+    .action-type {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.64rem;
+      border-radius: 999px;
+      padding: 4px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .action-type.ban {
+      color: #ff8b8b;
+      border-color: rgba(224, 60, 60, 0.34);
+      background: rgba(224, 60, 60, 0.12);
+    }
+
+    .action-type.warn {
+      color: #ffd97a;
+      border-color: rgba(255, 217, 122, 0.34);
+      background: rgba(255, 217, 122, 0.1);
+    }
+
+    .action-type.jail {
+      color: #f3ab72;
+      border-color: rgba(243, 171, 114, 0.34);
+      background: rgba(243, 171, 114, 0.1);
+    }
+
+    .action-type.kick {
+      color: #aab3c2;
+      border-color: rgba(170, 179, 194, 0.34);
+      background: rgba(170, 179, 194, 0.1);
+    }
+
+    .action-time {
+      font-family: "DM Mono", monospace;
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .list-card {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .section-kicker {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .list-item {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 8px;
+    }
+
+    .list-item > :last-child {
+      justify-self: end;
+      align-self: center;
+    }
+
+    .list-main {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+      justify-items: start;
+      text-align: left;
+    }
+
+    .list-name {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1.02rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .list-meta {
+      color: var(--text-muted);
+      font-size: 0.62rem;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+
+    .wait-time {
+      font-size: 0.66rem;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ecf2ff;
+      white-space: nowrap;
+    }
+
+    .wait-time.urgency-low {
+      color: #67f5d4;
+      border-color: rgba(45, 212, 191, 0.34);
+      background: rgba(45, 212, 191, 0.09);
+    }
+
+    .wait-time.urgency-mid {
+      color: #ffd97a;
+      border-color: rgba(255, 217, 122, 0.34);
+      background: rgba(255, 217, 122, 0.08);
+    }
+
+    .wait-time.urgency-high {
+      color: #ff8b8b;
+      border-color: rgba(224, 60, 60, 0.34);
+      background: rgba(224, 60, 60, 0.1);
+    }
+
+    .reason-tag {
+      display: inline-flex;
+      font-size: 0.64rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .staff-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--secondary);
+      box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.12);
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      font-size: 0.62rem;
+      border-radius: 999px;
+      padding: 4px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .rank-badge.admin {
+      color: #ff8b8b;
+      border-color: rgba(224, 60, 60, 0.28);
+      background: rgba(224, 60, 60, 0.08);
+    }
+
+    .rank-badge.mod {
+      color: #67f5d4;
+      border-color: rgba(45, 212, 191, 0.28);
+      background: rgba(45, 212, 191, 0.08);
+    }
+
+    @keyframes pulse-online {
+      0% {
+        box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.45);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(45, 212, 191, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(45, 212, 191, 0);
+      }
     }
 
     @keyframes scanlines {
@@ -558,13 +961,16 @@
     }
 
     @media (max-width: 1120px) {
-      .content-shell {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lower-grid {
         grid-template-columns: 1fr;
       }
 
-      .stack {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: none;
+      .staff-spotlights {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -580,10 +986,6 @@
       .topbar {
         flex-direction: column;
         align-items: stretch;
-      }
-
-      .topbar-side {
-        justify-items: start;
       }
 
       .brand-copy,
@@ -622,11 +1024,13 @@
       .nav {
         width: auto;
         grid-auto-flow: column;
+        padding-inline: 0;
       }
 
       .nav-button {
-        min-width: 62px;
-        padding: 10px 8px;
+        width: 62px;
+        height: 62px;
+        padding: 8px;
       }
 
       .main {
@@ -636,6 +1040,10 @@
       }
 
       .stack {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -710,80 +1118,396 @@
       <div class="main-inner">
         <header class="topbar">
           <div class="topbar-copy">
-            <div class="topbar-chip-row">
-              <span class="topbar-chip stable">Mutiny</span>
-              <span class="topbar-chip">DarkRP</span>
-              <span class="topbar-chip alert">Command Deck</span>
-            </div>
-            <h2 class="page-title">War Room</h2>
-            <p class="page-subtitle">Administrative shell and visual system for the Mutiny DarkRP server dashboard.</p>
+            <h2 class="page-title">Dashboard</h2>
+            <p class="page-subtitle">Command Overview</p>
           </div>
-
-          <div class="topbar-side">
-            <div class="clock-card">
-              <div class="clock-label">
-                <span>Server Time</span>
-                <span>Mutiny</span>
-              </div>
-              <div class="clock-time" id="clockTime">00:00:00</div>
-              <div class="clock-date" id="clockDate">Loading date</div>
-            </div>
-          </div>
+          <div class="live-timestamp" id="liveTimestamp">Loading timestamp</div>
         </header>
 
-        <section class="content-shell" aria-label="Dashboard shell">
-          <article class="panel" data-panel="dashboard">
-            <div class="hud-corners" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-            </div>
-            <div class="placeholder-copy">
-              <div class="panel-kicker">Primary View</div>
-              <h3 class="placeholder-title">Dashboard</h3>
-              <p class="placeholder-text">Main command surface reserved for future modules and live operational widgets.</p>
+        <section class="dashboard-content page-view active" data-page="dashboard" aria-label="Dashboard metrics">
+          <article class="card server-banner">
+            <h3 class="server-title">Mutiny DarkRP</h3>
+            <div class="banner-meta">
+              <span class="status-pill">Online</span>
+              <span class="meta-label">Players</span>
+              <span class="value-mono">128/128</span>
+              <span class="tag">Full</span>
             </div>
           </article>
 
-          <div class="stack">
-            <article class="mini-panel" data-panel="staff">
-              <div class="hud-corners" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
+          <section class="stats-grid" aria-label="Server stats">
+            <article class="card stat-card" data-accent="teal" data-stat="onlinePlayers" data-value="128">
+              <div class="stat-head">
+                <span class="stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="3"></circle><path d="M20 8v6"></path><path d="M23 11h-6"></path></svg>
+                </span>
+                <span class="stat-label">Online Players</span>
               </div>
-              <div class="placeholder-copy">
-                <div class="panel-kicker">Secondary Bay</div>
-                <h3 class="placeholder-title">Staff</h3>
-                <p class="placeholder-text">Reserved frame for staffing controls, roster health, and moderation tools.</p>
-              </div>
+              <p class="stat-number">128</p>
             </article>
 
-            <article class="mini-panel" data-panel="sits">
-              <div class="hud-corners" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
+            <article class="card stat-card" data-accent="teal" data-stat="totalPlayers" data-value="206900">
+              <div class="stat-head">
+                <span class="stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-7"></path></svg>
+                </span>
+                <span class="stat-label">Total Players</span>
               </div>
-              <div class="placeholder-copy">
-                <div class="panel-kicker">Secondary Bay</div>
-                <h3 class="placeholder-title">Sits</h3>
-                <p class="placeholder-text">Reserved frame for active admin sits, queue overview, and response workflow data.</p>
-              </div>
+              <p class="stat-number">206.9K</p>
             </article>
-          </div>
+
+            <article class="card stat-card" data-accent="red" data-stat="activeBans" data-value="391">
+              <div class="stat-head">
+                <span class="stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 8.5l7 7"></path><path d="M15.5 8.5l-7 7"></path></svg>
+                </span>
+                <span class="stat-label">Active Bans</span>
+              </div>
+              <p class="stat-number">391</p>
+            </article>
+
+            <article class="card stat-card" data-accent="red" data-stat="openSits" data-value="5">
+              <div class="stat-head">
+                <span class="stat-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 9h8"></path><path d="M8 13h5"></path></svg>
+                </span>
+                <span class="stat-label">Open Sits</span>
+              </div>
+              <p class="stat-number">5</p>
+            </article>
+          </section>
+
+          <section class="lower-grid" aria-label="Ops lists">
+            <article class="card list-card">
+              <header class="list-header">
+                <h3 class="section-title">Open Sits</h3>
+                <span class="section-kicker">Queue</span>
+              </header>
+              <ul class="list" id="openSitsList">
+                <li class="list-item" data-wait-min="1">
+                  <div class="list-main">
+                    <span class="list-name">Rook</span>
+                    <span class="list-meta"><span class="reason-tag">RDM</span></span>
+                  </div>
+                  <span class="wait-time">1m</span>
+                </li>
+                <li class="list-item" data-wait-min="3">
+                  <div class="list-main">
+                    <span class="list-name">Echo</span>
+                    <span class="list-meta"><span class="reason-tag">Propblock</span></span>
+                  </div>
+                  <span class="wait-time">3m</span>
+                </li>
+                <li class="list-item" data-wait-min="5">
+                  <div class="list-main">
+                    <span class="list-name">Vanta</span>
+                    <span class="list-meta"><span class="reason-tag">FailRP</span></span>
+                  </div>
+                  <span class="wait-time">5m</span>
+                </li>
+                <li class="list-item" data-wait-min="7">
+                  <div class="list-main">
+                    <span class="list-name">Kite</span>
+                    <span class="list-meta"><span class="reason-tag">NLR</span></span>
+                  </div>
+                  <span class="wait-time">7m</span>
+                </li>
+              </ul>
+            </article>
+
+            <article class="card list-card">
+              <header class="list-header">
+                <h3 class="section-title">Online Staff</h3>
+                <span class="section-kicker">Duty</span>
+              </header>
+              <ul class="list">
+                <li class="list-item">
+                  <div class="list-main">
+                    <span class="list-name">Nyx</span>
+                    <span class="list-meta"><span class="rank-badge admin">Senior Admin</span></span>
+                  </div>
+                  <span class="staff-dot" aria-label="online"></span>
+                </li>
+                <li class="list-item">
+                  <div class="list-main">
+                    <span class="list-name">Havoc</span>
+                    <span class="list-meta"><span class="rank-badge admin">Admin</span></span>
+                  </div>
+                  <span class="staff-dot" aria-label="online"></span>
+                </li>
+                <li class="list-item">
+                  <div class="list-main">
+                    <span class="list-name">Riven</span>
+                    <span class="list-meta"><span class="rank-badge mod">Moderator</span></span>
+                  </div>
+                  <span class="staff-dot" aria-label="online"></span>
+                </li>
+                <li class="list-item">
+                  <div class="list-main">
+                    <span class="list-name">Juno</span>
+                    <span class="list-meta"><span class="rank-badge mod">Moderator</span></span>
+                  </div>
+                  <span class="staff-dot" aria-label="online"></span>
+                </li>
+                <li class="list-item">
+                  <div class="list-main">
+                    <span class="list-name">Atlas</span>
+                    <span class="list-meta"><span class="rank-badge">Trial Mod</span></span>
+                  </div>
+                  <span class="staff-dot" aria-label="online"></span>
+                </li>
+              </ul>
+            </article>
+          </section>
         </section>
+
+        <section class="staff-content page-view" data-page="staff" aria-label="Staff metrics">
+          <article class="card staff-leaderboard">
+            <header class="list-header">
+              <h3 class="section-title">Staff Leaderboard</h3>
+              <span class="section-kicker">This Week</span>
+            </header>
+            <ol class="leaderboard-list">
+              <li class="leader-row" data-sits="92">
+                <span class="leader-rank gold">#1</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Nyx</span>
+                    <span class="rank-badge admin">Senior Admin</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">92</strong></span>
+                    <span class="leader-level">Level 10</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="87">
+                <span class="leader-rank silver">#2</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Havoc</span>
+                    <span class="rank-badge admin">Admin</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">87</strong></span>
+                    <span class="leader-level">Level 9</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="79">
+                <span class="leader-rank bronze">#3</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Riven</span>
+                    <span class="rank-badge mod">Senior Mod</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">79</strong></span>
+                    <span class="leader-level">Level 8</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="64">
+                <span class="leader-rank">#4</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Juno</span>
+                    <span class="rank-badge mod">Moderator</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">64</strong></span>
+                    <span class="leader-level">Level 7</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="52">
+                <span class="leader-rank">#5</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Atlas</span>
+                    <span class="rank-badge">Trial Mod</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">52</strong></span>
+                    <span class="leader-level">Level 6</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="43">
+                <span class="leader-rank">#6</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Vex</span>
+                    <span class="rank-badge mod">Moderator</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">43</strong></span>
+                    <span class="leader-level">Level 5</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="31">
+                <span class="leader-rank">#7</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Kairo</span>
+                    <span class="rank-badge">Trial Mod</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">31</strong></span>
+                    <span class="leader-level">Level 4</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+              <li class="leader-row" data-sits="24">
+                <span class="leader-rank">#8</span>
+                <div class="leader-main">
+                  <div class="leader-top">
+                    <span class="list-name">Wraith</span>
+                    <span class="rank-badge mod">Moderator</span>
+                  </div>
+                  <div class="leader-meta">
+                    <span class="sits-count">Sits: <strong class="sits-value">24</strong></span>
+                    <span class="leader-level">Level 3</span>
+                  </div>
+                  <div class="xp-track"><div class="xp-fill"></div></div>
+                </div>
+              </li>
+            </ol>
+          </article>
+
+          <section class="staff-spotlights" aria-label="Top staff spotlight">
+            <article class="card spotlight-card">
+              <span class="list-name">Nyx</span>
+              <span class="rank-badge admin">Senior Admin</span>
+              <div class="spotlight-stats">
+                <span>Sits: 92</span>
+                <span>🔥 14 days active</span>
+              </div>
+              <p class="spotlight-quote">"On duty — handling sits nonstop."</p>
+            </article>
+            <article class="card spotlight-card">
+              <span class="list-name">Havoc</span>
+              <span class="rank-badge admin">Admin</span>
+              <div class="spotlight-stats">
+                <span>Sits: 87</span>
+                <span>🔥 11 days active</span>
+              </div>
+              <p class="spotlight-quote">"Patrolling high-traffic zones tonight."</p>
+            </article>
+            <article class="card spotlight-card">
+              <span class="list-name">Riven</span>
+              <span class="rank-badge mod">Senior Mod</span>
+              <div class="spotlight-stats">
+                <span>Sits: 79</span>
+                <span>🔥 9 days active</span>
+              </div>
+              <p class="spotlight-quote">"Keeping queue times low and clean."</p>
+            </article>
+          </section>
+
+          <article class="card actions-card">
+            <header class="list-header">
+              <h3 class="section-title">Recent Staff Actions</h3>
+              <span class="section-kicker">Live Feed</span>
+            </header>
+            <ul class="actions-list">
+              <li class="action-row">
+                <div class="action-main">
+                  <span class="action-staff">Nyx</span>
+                  <span class="action-type ban">Banned</span>
+                  <span class="action-target">Ghostline</span>
+                </div>
+                <span class="action-time">12:41:18</span>
+              </li>
+              <li class="action-row">
+                <div class="action-main">
+                  <span class="action-staff">Havoc</span>
+                  <span class="action-type warn">Warned</span>
+                  <span class="action-target">Brickman</span>
+                </div>
+                <span class="action-time">12:38:03</span>
+              </li>
+              <li class="action-row">
+                <div class="action-main">
+                  <span class="action-staff">Riven</span>
+                  <span class="action-type jail">Jailed</span>
+                  <span class="action-target">Nettle</span>
+                </div>
+                <span class="action-time">12:34:29</span>
+              </li>
+              <li class="action-row">
+                <div class="action-main">
+                  <span class="action-staff">Juno</span>
+                  <span class="action-type kick">Kicked</span>
+                  <span class="action-target">Dredge</span>
+                </div>
+                <span class="action-time">12:30:12</span>
+              </li>
+              <li class="action-row">
+                <div class="action-main">
+                  <span class="action-staff">Atlas</span>
+                  <span class="action-type warn">Warned</span>
+                  <span class="action-target">Mason</span>
+                </div>
+                <span class="action-time">12:27:44</span>
+              </li>
+              <li class="action-row">
+                <div class="action-main">
+                  <span class="action-staff">Nyx</span>
+                  <span class="action-type ban">Banned</span>
+                  <span class="action-target">Volt</span>
+                </div>
+                <span class="action-time">12:25:09</span>
+              </li>
+            </ul>
+          </article>
+        </section>
+
       </div>
     </main>
   </div>
 
   <script>
     const navButtons = document.querySelectorAll('.nav-button');
-    const panelTitles = document.querySelectorAll('[data-panel] .placeholder-title');
+    const pageViews = document.querySelectorAll('.page-view');
     const pageTitle = document.querySelector('.page-title');
     const pageSubtitle = document.querySelector('.page-subtitle');
-    const clockTime = document.getElementById('clockTime');
-    const clockDate = document.getElementById('clockDate');
+    const liveTimestamp = document.getElementById('liveTimestamp');
+    const openSitsList = document.getElementById('openSitsList');
+    const leaderRows = document.querySelectorAll('.leader-row');
+
+    const titles = {
+      dashboard: 'DASHBOARD',
+      staff: 'STAFF',
+      sits: 'SITS',
+      performance: 'PERFORMANCE'
+    };
 
     const descriptions = {
-      dashboard: 'Administrative shell and visual system for the Mutiny DarkRP server dashboard.',
-      staff: 'Staffing wing reserved for moderation overview, permissions, and command routing.',
-      sits: 'Admin sit operations shell reserved for queue visibility and intervention tooling.',
-      performance: 'Performance wing reserved for tickrate, resource load, and server health telemetry.'
+      dashboard: 'Command Overview',
+      staff: 'Active roster and performance',
+      sits: 'Sits Overview',
+      performance: 'Server Performance'
+    };
+
+    const showPageView = (view) => {
+      pageViews.forEach((section) => {
+        section.classList.remove('active');
+      });
+
+      if (view === 'staff') {
+        document.querySelector('[data-page="staff"]')?.classList.add('active');
+      } else {
+        document.querySelector('[data-page="dashboard"]')?.classList.add('active');
+      }
     };
 
     navButtons.forEach((button) => {
@@ -797,32 +1521,62 @@
         button.setAttribute('aria-current', 'page');
 
         const view = button.dataset.view;
-        const label = view.charAt(0).toUpperCase() + view.slice(1);
-        pageTitle.textContent = label;
+        pageTitle.textContent = titles[view] || titles.dashboard;
         pageSubtitle.textContent = descriptions[view] || descriptions.dashboard;
-
-        const targetPanel = document.querySelector(`[data-panel="${view}"]`);
-        targetPanel?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showPageView(view);
       });
     });
 
-    const updateClock = () => {
+    const updateLiveTimestamp = () => {
       const now = new Date();
-      clockTime.textContent = now.toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
-      clockDate.textContent = now.toLocaleDateString([], {
+      liveTimestamp.textContent = now.toLocaleString([], {
         weekday: 'short',
         month: 'short',
         day: '2-digit',
-        year: 'numeric'
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
       });
     };
 
-    updateClock();
-    window.setInterval(updateClock, 1000);
+    const updateSitsUrgency = () => {
+      const sitRows = openSitsList?.querySelectorAll('.list-item') || [];
+      sitRows.forEach((row) => {
+        const waitValue = Number(row.dataset.waitMin || 0);
+        const waitBadge = row.querySelector('.wait-time');
+        if (!waitBadge) return;
+
+        waitBadge.classList.remove('urgency-low', 'urgency-mid', 'urgency-high');
+        if (waitValue < 2) {
+          waitBadge.classList.add('urgency-low');
+        } else if (waitValue < 5) {
+          waitBadge.classList.add('urgency-mid');
+        } else {
+          waitBadge.classList.add('urgency-high');
+        }
+      });
+    };
+
+    const updateLeaderboardBars = () => {
+      const sitsValues = [...leaderRows].map((row) => Number(row.dataset.sits || 0));
+      const maxSits = Math.max(...sitsValues, 1);
+
+      leaderRows.forEach((row) => {
+        const sits = Number(row.dataset.sits || 0);
+        const fill = row.querySelector('.xp-fill');
+        if (!fill) return;
+        const ratio = Math.max(10, Math.round((sits / maxSits) * 100));
+        fill.style.width = `${ratio}%`;
+      });
+    };
+
+    updateLiveTimestamp();
+    updateSitsUrgency();
+    updateLeaderboardBars();
+    showPageView('dashboard');
+    window.setInterval(updateLiveTimestamp, 1000);
   </script>
 </body>
 </html>
